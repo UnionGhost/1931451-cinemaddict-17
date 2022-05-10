@@ -23,5 +23,3 @@ render(new FooterStatisticsView(), siteFooterElement);
 
 filmsPresenter.init(siteMainElement, filmsModel);
 //filmDetailsPresenter.init(document.body);  Раскомментировать для попапа
-
-
