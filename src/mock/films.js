@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
 import { getRandomInteger, getRandomFloatInteger, getRandomBoolean, getRandomArrayElement, getRandomArrayList } from '../utils.js';
 
-const MAX_ID = 100;
+const MAX_ID = 20;
+//const MAX_COMMENTS_LENGTH = 10;
 
 const Titles = [
   'Made For Each Other',
@@ -11,16 +12,6 @@ const Titles = [
   'The Dance Of Life',
   'The Great Flamarion',
   'The Man With The Golden Arm'
-];
-
-const AlternativeTitles = [
-  'one',
-  'two',
-  'three',
-  'four',
-  'five',
-  'six',
-  'seven'
 ];
 
 const Posters = [
@@ -170,24 +161,25 @@ const generateOneComment = (id = 0) => ({
 const generateComments = () => {
   const array = [];
 
-  for (let i = 0; i <= getRandomInteger(0, Comments.MAX); i++) {
-    const randomId = getRandomInteger(0, MAX_ID);
-    array.push(generateOneComment(randomId));
+  for (let i = 0; i <= MAX_ID; i++) {
+    array.push(generateOneComment(i));
   }
 
   return array;
 };
 
+const commentsArray = generateComments();
+
 
 export const generateFilm = (id = getRandomInteger(0, MAX_ID)) => {
-  const comments = generateComments();
+  const title = getRandomArrayElement(Titles);
 
   return {
     id,
-    comments: comments.map((comment) => comment.id),
+    comments: getRandomArrayList(commentsArray.map((comment) => comment.id)), //.slice(-MAX_COMMENTS_LENGTH),
     filmInfo: {
-      title: getRandomArrayElement(Titles),
-      alternativeTitle: getRandomArrayElement(AlternativeTitles),
+      title: title,
+      alternativeTitle: title,
       totalRating: getRandomFloatInteger(TotalRating.MIN, TotalRating.MAX),
       poster: getRandomArrayElement(Posters),
       ageRating: getRandomArrayElement(AgeRatings),
@@ -214,3 +206,5 @@ export const generateFilm = (id = getRandomInteger(0, MAX_ID)) => {
     }};
 };
 
+
+export { commentsArray }; //Не уверен првильно ли экспортировать отсюда, а не из модели
