@@ -2,7 +2,6 @@ import HeaderProfileView from './view/header-profile-view.js';
 import MainNavigationView from './view/main-navigation-view.js';
 import FilmsPresenter from './presenter/films-presenter.js';
 import FooterStatisticsView from './view/footer-statistics-view.js';
-import FilmDetailsPresenter from './presenter/film-details-presenter.js';
 import {render} from './render.js';
 import FilmsModel from './model/films-model.js';
 
@@ -14,7 +13,6 @@ const siteFooterElement = document.querySelector('.footer');
 const filmsModel = new FilmsModel();
 
 const filmsPresenter = new FilmsPresenter();
-const filmDetailsPresenter = new FilmDetailsPresenter();
 
 
 render(new HeaderProfileView(), siteHeaderElement);
@@ -22,4 +20,11 @@ render(new MainNavigationView(), siteMainElement);
 render(new FooterStatisticsView(), siteFooterElement);
 
 filmsPresenter.init(siteMainElement, filmsModel);
-filmDetailsPresenter.init(document.body, filmsModel);  //Раскомментировать для попапа
+
+
+//  Стоит ли во view, film передавать #film?
+//  Читабельней в getElement
+//  Неполучилось поставить доп пробел в actors
+//  Что значит верхнеуровневая копия
+//  Правильно ли я объявил body в presentere
+

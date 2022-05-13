@@ -4,7 +4,9 @@ const MAX_LENGTH_FILMS = 5;
 
 
 export default class FilmsModel {
-  films = Array.from({length: MAX_LENGTH_FILMS}, generateFilm);
+  #films = Array.from({length: MAX_LENGTH_FILMS}, generateFilm);
 
-  getFilms = () => this.films;
+  get films() {
+    return  this.#films;
+  }
 }

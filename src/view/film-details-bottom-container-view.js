@@ -6,7 +6,7 @@ const createFilmDetailsBottomContainerTemplate = (film, commentsArray) => {
   const addComments = () => {
     comments.forEach((commentId) => {
       const { id, author, comment, date, emotion } = commentsArray[commentId];
-      console.log(commentsArray[commentId]);
+      //console.log(commentsArray[commentId]);
 
       return commentId === id ? `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
@@ -122,6 +122,8 @@ const createFilmDetailsBottomContainerTemplate = (film, commentsArray) => {
 
 
 export default class FilmDetailsBottomContainerView {
+  #element = null;
+
   constructor(film, commentsArray) {
     this.film = film;
     this.commentsArray = commentsArray;
@@ -132,14 +134,14 @@ export default class FilmDetailsBottomContainerView {
   }
 
   getElement() {
-    if(!this.element) {
-      this.element = createElement(this.getTemplate());
+    if(!this.#element) {
+      this.#element = createElement(this.getTemplate());
     }
 
-    return this.element;
+    return this.#element;
   }
 
   removeElement() {
-    this.element = null;
+    this.#element = null;
   }
 }
