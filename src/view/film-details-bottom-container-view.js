@@ -7,7 +7,7 @@ const createFilmDetailsBottomContainerTemplate = (film, commentsArray) => {
     let commentsList = '';
 
     commentsArray.forEach((data) => {
-      const { author, comment, date, emotion } = data;;
+      const { author, comment, date, emotion } = data;
 
       commentsList += `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
