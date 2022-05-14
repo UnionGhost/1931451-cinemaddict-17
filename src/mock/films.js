@@ -1,8 +1,13 @@
 import dayjs from 'dayjs';
-import { getRandomInteger, getRandomFloatInteger, getRandomBoolean, getRandomArrayElement, getRandomArrayList } from '../utils.js';
+import { getRandomInteger, getRandomFloatNumber, getRandomBoolean, getRandomArrayElement, getRandomArrayList } from '../utils.js';
 
-const MAX_ID = 20;
-//const MAX_COMMENTS_LENGTH = 10;
+const MAX_ID = 100;
+
+const CommentsLength = {
+  MIN_LENGTH: 0,
+  MAX_LENGTH: 20,
+  MAX_ID_LENGTH: 100,
+};
 
 const Titles = [
   'Made For Each Other',
@@ -158,17 +163,15 @@ const generateOneComment = (id = 0) => ({
   emotion: getRandomArrayElement(Comments.EMOTIONS)
 });
 
-const generateComments = () => {
+const generateComments = (data) => {
   const array = [];
 
-  for (let i = 0; i <= MAX_ID; i++) {
-    array.push(generateOneComment(i));
+  for (let i = 0; i < data.length; i++) {
+    array.push(generateOneComment(data[i]));
   }
 
   return array;
 };
-
-const commentsArray = generateComments();
 
 
 export const generateFilm = (id = getRandomInteger(0, MAX_ID)) => {
@@ -176,20 +179,18 @@ export const generateFilm = (id = getRandomInteger(0, MAX_ID)) => {
 
   return {
     id,
-    comments: getRandomArrayList(commentsArray.map((comment) => comment.id)), //.slice(-MAX_COMMENTS_LENGTH),
+    comments: Array.from({length: getRandomInteger(CommentsLength.MIN_LENGTH, CommentsLength.MAX_LENGTH)}, () => getRandomInteger(Comments.MIN_LENGTH, CommentsLength.MAX_ID_LENGTH)),
     filmInfo: {
       title: title,
       alternativeTitle: title,
-      totalRating: getRandomFloatInteger(TotalRating.MIN, TotalRating.MAX),
+      totalRating: getRandomFloatNumber(TotalRating.MIN, TotalRating.MAX),
       poster: getRandomArrayElement(Posters),
       ageRating: getRandomArrayElement(AgeRatings),
       director: getRandomArrayElement(Directors),
       writers: [
         getRandomArrayElement(Writers)
       ],
-      actors: [
-        getRandomArrayList(Actors)
-      ],
+      actors: getRandomArrayList(Actors),
       release: {
         date: getRandomInteger(ReleaseData.MIN, ReleaseData.MAX),
         releaseCountry: getRandomArrayElement(ReleaseCountries)
@@ -207,4 +208,4 @@ export const generateFilm = (id = getRandomInteger(0, MAX_ID)) => {
 };
 
 
-export { commentsArray }; //Не уверен првильно ли экспортировать отсюда, а не из модели
+export { generateComments };

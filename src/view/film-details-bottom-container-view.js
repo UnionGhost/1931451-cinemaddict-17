@@ -4,11 +4,12 @@ const createFilmDetailsBottomContainerTemplate = (film, commentsArray) => {
   const { comments } = film;
 
   const addComments = () => {
-    comments.forEach((commentId) => {
-      const { id, author, comment, date, emotion } = commentsArray[commentId];
-      //console.log(commentsArray[commentId]);
+    let commentsList = '';
 
-      return commentId === id ? `<li class="film-details__comment">
+    commentsArray.forEach((data) => {
+      const { author, comment, date, emotion } = data;;
+
+      commentsList += `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
               <img src="./images/emoji/${emotion}.png" width="55" height="55" alt="emoji-smile">
             </span>
@@ -20,10 +21,12 @@ const createFilmDetailsBottomContainerTemplate = (film, commentsArray) => {
                 <button class="film-details__comment-delete">Delete</button>
               </p>
            </div>
-         </li>`
-        : '';
+         </li>`;
     });
+
+    return commentsList;
   };
+
 
   return (
     `<div class="film-details__bottom-container">
@@ -32,58 +35,6 @@ const createFilmDetailsBottomContainerTemplate = (film, commentsArray) => {
 
         <ul class="film-details__comments-list">
         ${addComments()}
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/${commentsArray[comments[0]].emotion}.png" width="55" height="55" alt="emoji-smile">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Interesting setting and a good cast</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${commentsArray[comments[0]].author}</span>
-                <span class="film-details__comment-day">2019/12/31 23:59</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/sleeping.png" width="55" height="55" alt="emoji-sleeping">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Booooooooooring</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">2 days ago</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/puke.png" width="55" height="55" alt="emoji-puke">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Very very old. Meh</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">2 days ago</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/angry.png" width="55" height="55" alt="emoji-angry">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Almost two hours? Seriously?</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">Today</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
         </ul>
 
         <div class="film-details__new-comment">

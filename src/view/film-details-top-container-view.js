@@ -16,7 +16,6 @@ const createFilmDetailsTopContainerTemplate = (film) => {
     return template;
   };
 
-
   return (
     `<div class="film-details__top-container">
       <div class="film-details__close">

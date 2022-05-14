@@ -23,8 +23,7 @@ filmsPresenter.init(siteMainElement, filmsModel);
 
 
 //  Стоит ли во view, film передавать #film?
-//  Читабельней в getElement
-//  Неполучилось поставить доп пробел в actors
+
 //  Что значит верхнеуровневая копия
-//  Правильно ли я объявил body в presentere
+
 
