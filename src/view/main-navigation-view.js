@@ -12,13 +12,13 @@ const createMainNavigationTemplate = () => (
 export default class MainNavigationView {
   #element = null;
 
-  getTempate() {
+  get tempate() {
     return createMainNavigationTemplate();
   }
 
   getElement() {
     if(!this.#element) {
-      this.#element = createElement(this.getTempate());
+      this.#element = createElement(this.tempate);
     }
 
     return this.#element;

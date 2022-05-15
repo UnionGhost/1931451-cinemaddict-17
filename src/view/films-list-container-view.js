@@ -5,13 +5,13 @@ const createFilmsListContainerTemplate = () => '<div class="films-list__containe
 export default class FilmsListContainerView {
   #element = null;
 
-  getTemplate() {
+  get template() {
     return createFilmsListContainerTemplate();
   }
 
   getElement() {
     if(!this.#element) {
-      this.#element = createElement(this.getTemplate());
+      this.#element = createElement(this.template);
     }
 
     return this.#element;

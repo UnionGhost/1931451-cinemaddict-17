@@ -11,13 +11,13 @@ const createLoadingTemplate = () => (
 export default class LoadingView {
   #element = null;
 
-  getTemplate() {
+  get template() {
     return createLoadingTemplate();
   }
 
   getElement() {
     if(!this.#element) {
-      this.#element = createElement(this.getTemplate());
+      this.#element = createElement(this.template);
     }
 
     return this.#element;

@@ -5,13 +5,13 @@ const createFilmsListTemplate = () => '<section class="films-list"><h2 class="fi
 export default class FilmsListView {
   #element = null;
 
-  getTemplate() {
+  get template() {
     return createFilmsListTemplate();
   }
 
   getElement() {
     if(!this.#element) {
-      this.#element = createElement(this.getTemplate());
+      this.#element = createElement(this.template);
     }
 
     return this.#element;

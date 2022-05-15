@@ -5,13 +5,13 @@ const createFooterStatisticsTemplate = () => '<section class="footer__statistics
 export default class FooterStatisticsView {
   #element = null;
 
-  getTemplate() {
+  get template() {
     return createFooterStatisticsTemplate();
   }
 
   getElement() {
     if(!this.#element) {
-      this.#element = createElement(this.getTemplate());
+      this.#element = createElement(this.template);
     }
 
     return this.#element;
