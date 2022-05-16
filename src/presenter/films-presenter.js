@@ -48,8 +48,6 @@ export default class FilmsPresenter {
     const filmComponent = new FilmCardView(film);
 
     render(filmComponent, this.#filmsListContainer.getElement());
-
-    //this.#openPopup();
   };
 
   #renderPopup = (film) => {
