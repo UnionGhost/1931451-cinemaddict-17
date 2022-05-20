@@ -20,10 +20,3 @@ render(new MainNavigationView(), siteMainElement);
 render(new FooterStatisticsView(), siteFooterElement);
 
 filmsPresenter.init(siteMainElement, filmsModel);
-
-//  Как проверить копится ли елемент в оперативной памяти
-//  Что значит верхнеуровневая копия
-//  Не могу проверить копятся ли обработчики событий
-//  Как удалить обработчики
-//  Как сделать делегирование в моем проекте
-//  Как через JS обратиться к псевдоэлементу, или создать его?

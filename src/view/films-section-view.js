@@ -9,7 +9,7 @@ export default class FilmsSectionView {
     return createFilmsSectionTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }

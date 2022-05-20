@@ -9,7 +9,7 @@ export default class FilmDetailsContainerView {
     return createFilmDetailsContainerTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }

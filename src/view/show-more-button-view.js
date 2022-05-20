@@ -9,7 +9,7 @@ export default class ShowMoreButtonView {
     return createShowMoreButtonTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }

@@ -15,7 +15,7 @@ export default class LoadingView {
     return createLoadingTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }

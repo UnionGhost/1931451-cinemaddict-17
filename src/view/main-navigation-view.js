@@ -16,7 +16,7 @@ export default class MainNavigationView {
     return createMainNavigationTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.tempate);
     }

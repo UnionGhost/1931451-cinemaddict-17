@@ -9,7 +9,7 @@ export default class FooterStatisticsView {
     return createFooterStatisticsTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }

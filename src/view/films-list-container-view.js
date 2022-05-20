@@ -9,7 +9,7 @@ export default class FilmsListContainerView {
     return createFilmsListContainerTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }

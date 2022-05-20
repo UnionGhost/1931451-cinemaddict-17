@@ -168,7 +168,7 @@ export default class FilmDetailsPopupView {
     return createFilmDetailsPopupTemplate(this.#film, this.#commentsArray);
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
       this.#element = createElement(this.template);
     }
