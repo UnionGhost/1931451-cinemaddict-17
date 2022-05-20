@@ -44,4 +44,6 @@ const getRandomArrayList = (element) => {
 
 const humanizeFilmDueDate = (releaseData) => dayjs(releaseData).format('D MMMM');
 
-export {getRandomInteger, humanizeFilmDueDate, getRandomFloatNumber, getRandomArrayElement, getRandomBoolean, getRandomArrayList};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, humanizeFilmDueDate, getRandomFloatNumber, getRandomArrayElement, getRandomBoolean, getRandomArrayList, isEscapeKey};

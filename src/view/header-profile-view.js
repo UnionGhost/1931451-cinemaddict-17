@@ -10,13 +10,13 @@ const createHeaderProfileTemplate = () => (
 export default class HeaderProfileView {
   #element = null;
 
-  getTemplate() {
+  get template() {
     return createHeaderProfileTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
-      this.#element = createElement(this.getTemplate());
+      this.#element = createElement(this.template);
     }
 
     return this.#element;

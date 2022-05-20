@@ -5,13 +5,13 @@ const createFilmsSectionTemplate = () => '<section class="films"></section>';
 export default class FilmsSectionView {
   #element = null;
 
-  getTemplate() {
+  get template() {
     return createFilmsSectionTemplate();
   }
 
-  getElement() {
+  get element() {
     if(!this.#element) {
-      this.#element = createElement(this.getTemplate());
+      this.#element = createElement(this.template);
     }
 
     return this.#element;

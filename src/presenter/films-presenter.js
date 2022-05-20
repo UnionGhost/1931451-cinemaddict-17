@@ -4,11 +4,10 @@ import FilmsListView from '../view/films-list-view.js';
 import FilmsListContainerView from '../view/films-list-container-view.js';
 import FilmCardView from '../view/film-card-view.js';
 import ShowMoreButtonView from '../view/show-more-button-view.js';
-import FilmDetailsView from '../view/film-details-view.js';
-import FilmDetailsFormView from '../view/film-details-form-view.js';
-import FilmDetailsTopContainerView from '../view/film-details-top-container-view.js';
-import FilmDetailsBottomContainerView from '../view/film-details-bottom-container-view.js';
+import FilmDetailsContainerView from '../view/film-details-container-view.js';
+import FilmDetailsPopupView from '../view/film-details-popup-view.js';
 import { generateComments } from '../mock/films.js';
+import { isEscapeKey } from '../utils.js';
 import { render } from '../render.js';
 
 const BODY = document.body;
@@ -20,8 +19,7 @@ export default class FilmsPresenter {
   #filmsSection = new FilmsSectionView();
   #filmsList = new FilmsListView();
   #filmsListContainer = new FilmsListContainerView();
-  #filmDetails = new FilmDetailsView();
-  #filmDetailsForm = new FilmDetailsFormView();
+  #filmDetailsContainer = new FilmDetailsContainerView();
 
   #cardsFilms = [];
 
@@ -32,30 +30,81 @@ export default class FilmsPresenter {
 
     render(new SortView(), this.#filmsContainer);
     render(this.#filmsSection, this.#filmsContainer);
-    render(this.#filmsList, this.#filmsSection.getElement());
-    render(this.#filmsListContainer, this.#filmsList.getElement());
+    render(this.#filmsList, this.#filmsSection.element);
+    render(this.#filmsListContainer, this.#filmsList.element);
 
 
     for (let i = 0; i < this.#cardsFilms.length; i++) {
       this.#renderFilm(this.#cardsFilms[i]);
     }
 
-    this.#popupOpen();
-    render(new ShowMoreButtonView(), this.#filmsList.getElement());
+    render(new ShowMoreButtonView(), this.#filmsList.element);
   };
 
-  #popupOpen = () => {
-    render(this.#filmDetails, BODY);
-    render(this.#filmDetailsForm, this.#filmDetails.getElement());
-
-    render(new FilmDetailsTopContainerView(this.#cardsFilms[0]), this.#filmDetailsForm.getElement());
-    render(new FilmDetailsBottomContainerView(this.#cardsFilms[0], generateComments(this.#cardsFilms[0].comments)), this.#filmDetailsForm.getElement());
+  #getFilmById = (id) => {
+    for (let i = 0; i < this.#cardsFilms.length; i++) {
+      if (this.#cardsFilms[i].id.toString() === id) {
+        return this.#cardsFilms[i];
+      }
+    }
   };
+
+
+  #renderPopup = (film) => {
+    const filmDetailsComponent = new FilmDetailsPopupView(film, generateComments(film.comments));
+
+    render(this.#filmDetailsContainer, BODY);
+
+    if (document.querySelectorAll('.film-details__inner')) {
+      document.querySelectorAll('.film-details__inner').forEach((element) => element.remove());
+      filmDetailsComponent.removeElement();
+    }
+
+    render(filmDetailsComponent, this.#filmDetailsContainer.element);
+  };
+
+
+  #closePopup() {
+    document.querySelectorAll('.film-details__inner').forEach((element) => element.remove());
+    document.querySelector('.film-details').remove();
+    new FilmDetailsPopupView().removeElement();
+    this.#filmDetailsContainer.removeElement();
+    BODY.classList.remove('hide-overflow');
+
+    document.removeEventListener('keydown', this.#onEscClosePopupKeydown);
+  }
+
+  #onEscClosePopupKeydown = (evt) => {
+    evt.preventDefault();
+
+    if (isEscapeKey(evt)) {
+      this.#closePopup();
+    }
+  };
+
+  #onButtonClosePopupClick = (evt) => {
+    evt.preventDefault();
+    this.#closePopup();
+  };
+
+  #onFilmCardOpenPopupClick = (evt) => {
+    if (!evt.target.classList.contains('film-card__controls-item')) {
+      this.#renderPopup(this.#getFilmById(evt.currentTarget.id));
+
+      BODY.classList.add('hide-overflow');
+
+      document.addEventListener('keydown', this.#onEscClosePopupKeydown);
+      document.querySelector('.film-details__close-btn').addEventListener('click', this.#onButtonClosePopupClick);
+    }
+  };
+
 
   #renderFilm = (film) => {
     const filmComponent = new FilmCardView(film);
 
-    render(filmComponent, this.#filmsListContainer.getElement());
+    render(filmComponent, this.#filmsListContainer.element);
+
+    filmComponent.element.addEventListener('click', this.#onFilmCardOpenPopupClick);
   };
 }
 
