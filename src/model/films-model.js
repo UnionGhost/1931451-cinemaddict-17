@@ -1,6 +1,6 @@
 import { generateFilm } from '../mock/films';
 
-const MAX_LENGTH_FILMS = 5;
+const MAX_LENGTH_FILMS = 27;
 
 
 export default class FilmsModel {

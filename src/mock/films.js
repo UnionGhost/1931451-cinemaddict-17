@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { getRandomInteger, getRandomFloatNumber, getRandomBoolean, getRandomArrayElement, getRandomArrayList } from '../utils.js';
 
-const MAX_ID = 100;
+const MAX_ID = 1000;
 
 const CommentsLength = {
   MIN_LENGTH: 0,
