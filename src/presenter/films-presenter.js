@@ -9,7 +9,7 @@ import FilmDetailsContainerView from '../view/film-details-container-view.js';
 import FilmDetailsPopupView from '../view/film-details-popup-view.js';
 import { generateComments } from '../mock/films.js';
 import { isEscapeKey } from '../utils.js';
-import { render } from '../render.js';
+import { render, remove} from '../framework/render.js';
 
 const BODY = document.body;
 const FILM_COUNT_PER_STEP = 5;
@@ -39,8 +39,7 @@ export default class FilmsPresenter {
   };
 
 
-  #onShowMoreButtonClick = (evt) => {
-    evt.preventDefault();
+  #onShowMoreButtonClick = () => {
     this.#cardsFilms
       .slice(this.#renderFilmCount, this.#renderFilmCount + FILM_COUNT_PER_STEP)
       .forEach((film) => this.#renderFilm(film));
@@ -48,8 +47,7 @@ export default class FilmsPresenter {
     this.#renderFilmCount += FILM_COUNT_PER_STEP;
 
     if (this.#renderFilmCount >= this.#cardsFilms.length) {
-      this.#showMoreButtonView.element.remove();
-      this.#showMoreButtonView.removeElement();
+      remove(this.#showMoreButtonView);
     }
   };
 
@@ -136,7 +134,7 @@ export default class FilmsPresenter {
     if (this.#cardsFilms.length > FILM_COUNT_PER_STEP) {
       render(this.#showMoreButtonView, this.#filmsList.element);
 
-      this.#showMoreButtonView.element.addEventListener('click', this.#onShowMoreButtonClick);
+      this.#showMoreButtonView.setClickHandler(this.#onShowMoreButtonClick);
     }
   };
 }

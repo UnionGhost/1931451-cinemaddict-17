@@ -3,7 +3,7 @@ import HeaderProfileView from './view/header-profile-view.js';
 import MainNavigationView from './view/main-navigation-view.js';
 import FooterStatisticsView from './view/footer-statistics-view.js';
 import FilmsPresenter from './presenter/films-presenter.js';
-import {render} from './render.js';
+import { render } from './framework/render.js';
 
 
 const siteHeaderElement = document.querySelector('.header');
